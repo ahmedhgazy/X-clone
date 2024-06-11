@@ -1,0 +1,21 @@
+.container-div {
+  padding-right: 15px;
+  padding-left: 15px;
+  display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: 1fr 2fr 1fr;
+
+  // gap: 40px;
+}
+
+@media (max-width: 991px) {
+  .container-div {
+    padding-right: 15px;
+    padding-left: 15px;
+    display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+    // gap: 40px;
+  }
+}
