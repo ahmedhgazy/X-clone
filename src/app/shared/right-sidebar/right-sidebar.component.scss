@@ -19,3 +19,10 @@ a {
   // background-color: #2e2d2d;
   padding: 15px;
 }
+
+@media (max-width: 768px) {
+  .row {
+    display: none;
+    // opacity: 0;
+  }
+}

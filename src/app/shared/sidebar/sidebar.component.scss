@@ -58,8 +58,19 @@
   }
 }
 
-@media (max-width: 767px) {
-  .sidebar-wrapper {
-    margin-left: 4px;
+@media (max-width: 768px) {
+  .links {
+    a span {
+      display: none;
+      // opacity: 0;
+    }
+    button .btn {
+      display: none;
+      opacity: 0;
+    }
+  }
+  button {
+    display: none;
+    opacity: 0;
   }
 }
