@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   authS: AuthService = inject(AuthService);
   sub$: Subscription[] = [];
   username = this.authS.userSub.getValue().username;
-  name = this.authS.userSub.getValue().username;
+  name = this.authS.userSub.getValue().name;
 
   ngOnInit(): void {
     this.authS.userSub.subscribe((user) => {

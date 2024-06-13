@@ -12,8 +12,8 @@ import { AuthService } from './services/auth/auth.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'twitter-clone';
-  visible: boolean = false;
+  title = 'X-clone';
+
   authS: AuthService = inject(AuthService);
 
   ngOnInit(): void {
