@@ -1,5 +1,4 @@
 import { Component, OnInit, inject, Renderer2, Inject } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,7 +23,7 @@ const PRIM_CMP = [
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, LoginComponent, PRIM_CMP],
+  imports: [CommonModule, FormsModule, PRIM_CMP],
   selector: 'app-logout',
   templateUrl: 'logout.component.html',
   styleUrls: ['logout.component.scss'],
@@ -49,7 +48,7 @@ export class Logout implements OnInit {
     this.visible = true;
   }
   ngOnInit() {
-    this.handleUserClicks();
+    // this.handleUserClicks();
   }
   onSubmit(form: NgForm) {
     this.isLoading = true;
@@ -57,7 +56,11 @@ export class Logout implements OnInit {
     const name = form.value.name;
     const username = form.value.username;
     const password = form.value.password;
-    console.log(name, username, password);
+    if (this.login) {
+      console.log(username, password);
+    } else {
+      console.log(name, username, password);
+    }
 
     if (!this.login) {
       obs = this.authS.signUp(name, username, password);
@@ -67,13 +70,12 @@ export class Logout implements OnInit {
     obs.subscribe({
       next: (userInfo) => {
         this.isLoading = false;
-        console.log(userInfo.access_token);
+
         this.router.navigateByUrl('/home');
       },
       error: (error) => {
         this.isLoading = false;
         this.error = true;
-        console.log(error);
       },
     });
   }

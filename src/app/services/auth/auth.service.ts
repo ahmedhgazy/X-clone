@@ -33,10 +33,11 @@ export class AuthService {
       })
       .pipe(
         tap((user) => {
+          console.log(user);
           this.storingUser(
             user.name,
             user.username,
-            user.password,
+            user.id,
             user.access_token
           );
         }),
@@ -49,10 +50,12 @@ export class AuthService {
       .post<User>(`${this.API}auth/login`, { username, password })
       .pipe(
         tap((user) => {
+          console.log(user);
+
           this.storingUser(
             user.name,
             user.username,
-            user.password,
+            user.id,
             user.access_token
           );
         }),
@@ -60,16 +63,29 @@ export class AuthService {
       );
   }
 
+  autoLogin() {
+    const loadedUser: User = JSON.parse(localStorage.getItem('user'));
+    if (!loadedUser) {
+      return;
+    }
+    const newUser: User = {
+      access_token: loadedUser.access_token,
+      id: loadedUser.id,
+      name: loadedUser.name,
+      username: loadedUser.username,
+    };
+    this.userSub.next(newUser);
+  }
   private storingUser(
     name: string,
     username: string,
-    password: string,
+    id: string,
     access_token: string
   ) {
     const user: User = {
       name: name,
       username: username,
-      password: password,
+      id: id,
       access_token: access_token,
     };
     this.userSub.next(user);

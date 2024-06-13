@@ -17,15 +17,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
   date: Date = new Date();
   pService: ProfileService = inject(ProfileService);
   authS: AuthService = inject(AuthService);
-  userName: User;
   sub$: Subscription[] = [];
+  username = this.authS.userSub.getValue().username;
+  name = this.authS.userSub.getValue().username;
+
   ngOnInit(): void {
-    this.userName = this.authS.getCurrentUser();
-    this.getUserInfo(this.userName.username);
+    this.authS.userSub.subscribe((user) => {
+      if (user) {
+        this.username = user.username;
+      }
+    });
+    this.getUserInfo();
   }
 
-  getUserInfo(username: string) {
-    this.pService.getUserInfo(username).subscribe();
+  getUserInfo() {
+    this.pService.getUserName(this.username).subscribe();
   }
 
   ngOnDestroy(): void {

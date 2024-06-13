@@ -1,6 +1,12 @@
+import { Interface } from 'node:readline';
+
 export interface User {
+  access_token?: string;
   name?: string;
   username?: string;
-  password?: string;
-  access_token?: string;
+  id?: string;
+}
+
+export interface UserName {
+  name: string;
 }
