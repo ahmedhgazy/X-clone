@@ -4,6 +4,9 @@ $link-font-size: 20px;
 $link-font-weight: 700;
 
 .sidebar-wrapper {
+  padding: 0;
+  margin: 0;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   margin-left: 15px;
@@ -86,7 +89,7 @@ $link-font-weight: 700;
   }
 }
 
-@media (min-width: 921px) {
+@media (min-width: 1200px) {
   .post-a {
     .r-4qtqp9 {
       display: none;
@@ -95,7 +98,8 @@ $link-font-weight: 700;
     }
   }
 }
-@media (max-width: 921px) {
+
+@media (max-width: 1200px) {
   .links {
     a span,
     button .btn,
