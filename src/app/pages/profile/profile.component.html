@@ -1,9 +1,11 @@
 <div class="row">
   <div class="col-12">
     <section class="header">
-      <i class="pi pi-arrow-left"></i>
+      <span class="p-1">
+        <i routerLink="/home" class="pi pi-arrow-left"></i>
+      </span>
       <div class="user-info">
-        <h2>User Name</h2>
+        <h2>userName</h2>
         <span class="posts">0 posts</span>
       </div>
     </section>
@@ -17,7 +19,7 @@
         <p>name</p>
         <p class="mt-1">
           <i class="pi pi-calendar"></i>
-          Joined {{ date | date : "mm yy" }}
+          Joined {{ date | date : "mediumDate" }}
         </p>
       </section>
     </div>

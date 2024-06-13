@@ -18,13 +18,24 @@
   display: flex;
   // padding-left: 16px;
   // padding-right: 16px;
+  cursor: pointer;
   padding: 5px 16px;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
   i {
     height: 20px;
     max-width: 100%;
+    font-size: 15px;
     width: 20px;
+    // padding: 20px 10px;
+  }
+  span:hover {
+    background-color: rgb(51, 54, 57, 0.6);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
   }
   .user-info {
     h2 {
@@ -60,7 +71,7 @@
     position: absolute;
     width: 150px;
     height: 150px;
-    background-color: green;
+    background-color: #00897b;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -116,14 +127,67 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+
   li {
+    display: inline-block;
+    padding: 10px 0;
+    margin: 0 auto;
     a {
-      max-width: 100%;
-      height: 30px;
       display: flex;
+      max-width: 100%;
+      height: 52px;
+      overflow: hidden;
+      flex-wrap: wrap;
+      flex: 1;
+      position: relative;
+      padding: 6px 25px;
+
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+    }
+    a::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 0;
+      bottom: 0;
+      padding: 0 10px;
+      background-color: rgb(51, 54, 57, 0.6);
+      transition: 0.3s ease;
+      -webkit-transition: 0.3s ease-out;
+      -moz-transition: 0.3s ease;
+      -ms-transition: 0.3s ease;
+      -o-transition: 0.3s ease;
+    }
+
+    a:hover::before {
+      width: 100%;
+      height: 100%;
+    }
+
+    a::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      left: -100%;
+      bottom: 0;
+      padding: 0 10px;
+      background-color: rgb(29, 155, 240);
+      transition: 0.3s ease;
+      -webkit-transition: 0.3s ease;
+      -moz-transition: 0.3s ease;
+      -ms-transition: 0.3s ease;
+      -o-transition: 0.3s ease;
+    }
+    a:hover::after {
+      left: 0;
     }
   }
 }

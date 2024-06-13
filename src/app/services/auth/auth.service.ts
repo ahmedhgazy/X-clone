@@ -110,4 +110,8 @@ export class AuthService {
     localStorage.removeItem('user');
     // this.router.navigate(['/logout']);
   }
+
+  getCurrentUser(): User {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }

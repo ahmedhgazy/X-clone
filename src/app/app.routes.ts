@@ -12,7 +12,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: MainContent,
+        component: HomeComponent,
       },
       {
         path: 'profile',
