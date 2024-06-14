@@ -1,6 +1,9 @@
 //   background-color: #2e2d2d;
 
 .sidebar-wrapper {
+  position: sticky;
+  right: 0;
+  top: 0;
   .p-inputtext {
     border-radius: 30px;
     -webkit-border-radius: 30px;

@@ -71,6 +71,26 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+    .wrraper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      cursor: pointer;
+      .logo {
+        font-weight: 400;
+        font-size: 90px;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        top: -6px;
+        // left: 38px;
+        // top: -15px;
+        // z-index: 11111111111111112000000000000;
+      }
+    }
   }
   .img-bottom-side {
     // position: absolute;
@@ -151,7 +171,7 @@
         top: 0;
         bottom: 0;
         padding: 0 10px;
-        background-color: rgb(51, 54, 57, 0.6);
+        background-color: rgba(51, 54, 57, 0.6);
         transition: 0.3s ease;
         -webkit-transition: 0.3s ease-out;
         -moz-transition: 0.3s ease;

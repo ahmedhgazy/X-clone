@@ -8,6 +8,7 @@ body {
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: black;
   color: white;
+  // height: 100vh;
 }
 
 a {
@@ -27,31 +28,6 @@ html {
   margin-right: auto;
 }
 
-//
-/* Small */
-@media (min-width: 768px) {
-  .container-div {
-    width: 750px;
-  }
-}
-/* Medium */
-@media (min-width: 991px) {
-  .container-div {
-    width: 970px;
-  }
-}
-/* Large */
-@media (min-width: 1200px) {
-  .container-div {
-    width: 1200px;
-  }
-}
-
-/*
- ####
- Customize primeNg components
- ####
-*/
 .p-inputtext {
   font-family: var(--font-family);
   font-feature-settings: var(--font-feature-settings, normal);

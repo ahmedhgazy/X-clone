@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   authS: AuthService = inject(AuthService);
   sub$: Subscription[] = [];
   username = this.authS.userSub.getValue().username;
+  LogoChar;
   name = this.authS.userSub.getValue().name;
 
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     });
     this.getUserInfo();
+    this.getUserLogo();
   }
 
   getUserInfo() {
@@ -36,5 +38,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub$.forEach((sub) => sub.unsubscribe());
+  }
+
+  getUserLogo() {
+    const USERNAME = this.authS.userSub.getValue().username;
+    const firstLetter = USERNAME.charAt(0); // "H"
+    this.LogoChar = firstLetter;
   }
 }
