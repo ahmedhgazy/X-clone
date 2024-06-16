@@ -48,7 +48,7 @@ export class Logout implements OnInit {
     this.visible = true;
   }
   ngOnInit() {
-    // this.handleUserClicks();
+    this.handleUserClicks();
   }
   onSubmit(form: NgForm) {
     this.isLoading = true;
