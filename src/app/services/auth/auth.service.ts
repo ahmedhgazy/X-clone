@@ -64,7 +64,7 @@ export class AuthService {
   }
 
   autoLogin() {
-    const loadedUser: User = JSON.parse(localStorage.getItem('user'));
+    const loadedUser: User = JSON.parse(window.localStorage.getItem('user'));
     if (!loadedUser) {
       return;
     }
@@ -89,7 +89,7 @@ export class AuthService {
       access_token: access_token,
     };
     this.userSub.next(user);
-    localStorage.setItem('user', JSON.stringify(user));
+    window.localStorage.setItem('user', JSON.stringify(user));
   }
   private handleAuthError(errorResponse: HttpErrorResponse) {
     let error = 'Wrong password';

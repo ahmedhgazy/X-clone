@@ -15,4 +15,6 @@ import { InputTextModule } from 'primeng/inputtext';
   templateUrl: './right-sidebar.component.html',
   styleUrl: './right-sidebar.component.scss',
 })
-export class RightSidebarComponent {}
+export class RightSidebarComponent {
+  getUserName() {}
+}

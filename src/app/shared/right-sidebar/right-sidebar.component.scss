@@ -50,3 +50,16 @@
     display: inline-block;
   }
 }
+
+input {
+  height: 35px;
+  background-color: transparent;
+  color: var(surface-600);
+  border: 0;
+
+  &:focus,
+  &:active {
+    border: 0;
+    outline: none;
+  }
+}
