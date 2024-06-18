@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputIconModule } from 'primeng/inputicon';
+import { IconFieldModule } from 'primeng/iconfield';
 @Component({
   selector: 'app-RSidebar',
   standalone: true,
@@ -11,6 +13,8 @@ import { InputTextModule } from 'primeng/inputtext';
     InputGroupModule,
     InputGroupAddonModule,
     InputTextModule,
+    InputIconModule,
+    IconFieldModule,
   ],
   templateUrl: './right-sidebar.component.html',
   styleUrl: './right-sidebar.component.scss',
