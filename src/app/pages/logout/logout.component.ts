@@ -49,6 +49,7 @@ export class Logout implements OnInit {
   }
   ngOnInit() {
     this.handleUserClicks();
+    console.log(this.login)
   }
   onSubmit(form: NgForm) {
     this.isLoading = true;
