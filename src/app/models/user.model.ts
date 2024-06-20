@@ -7,6 +7,33 @@ export interface User {
   id?: string;
 }
 
-export interface UserName {
-  name: string;
+export interface UserInfo {
+  _id: string;
+  profileImage: string;
+  coverImage: string;
+  bio: string;
+  birthDate: string;
+  location: string;
+  website: string;
+  isPrivate: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: 0;
+}
+
+export interface UserActions {
+  likes: 0;
+  posts: 0;
+  followers: 0;
+  following: 0;
+  media: 0;
+}
+
+export interface UpdateProfile {
+  bio: string;
+  birthDate: string;
+  location: string;
+  website: string;
+  isPrivate: boolean;
 }

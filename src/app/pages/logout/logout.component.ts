@@ -12,18 +12,21 @@ import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
-const PRIM_CMP = [
+import { LoadingSpinner } from '../../shared/loading-spinner/loading-spinner';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+export const PRIM_CMP = [
   DialogModule,
   ButtonModule,
   InputTextModule,
   FloatLabelModule,
   PasswordModule,
   StyleClassModule,
+  InputTextareaModule,
 ];
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, PRIM_CMP],
+  imports: [CommonModule, FormsModule, PRIM_CMP, LoadingSpinner],
   selector: 'app-logout',
   templateUrl: 'logout.component.html',
   styleUrls: ['logout.component.scss'],
@@ -38,7 +41,7 @@ export class Logout implements OnInit {
   visible: boolean = false;
   login = false;
   value = '';
-  error = false;
+  error = null;
   isLoading = false;
   toggleRM() {
     this.login = !this.login;
@@ -48,7 +51,7 @@ export class Logout implements OnInit {
     this.visible = true;
   }
   ngOnInit() {
-    this.handleUserClicks();
+    // this.handleUserClicks();
   }
   onSubmit(form: NgForm) {
     this.isLoading = true;
@@ -62,10 +65,11 @@ export class Logout implements OnInit {
       console.log(name, username, password);
     }
 
+    const unWS = username.replace(/\s+/g, '');
     if (!this.login) {
-      obs = this.authS.signUp(name, username, password);
+      obs = this.authS.signUp(name, unWS, password);
     } else {
-      obs = this.authS.signIn(username, password);
+      obs = this.authS.signIn(unWS, password);
     }
     obs.subscribe({
       next: (userInfo) => {
@@ -75,7 +79,7 @@ export class Logout implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        this.error = true;
+        this.error = error;
       },
     });
   }
@@ -98,5 +102,8 @@ export class Logout implements OnInit {
         this.login = true;
       });
     });
+  }
+  cancelError() {
+    this.error = null;
   }
 }
