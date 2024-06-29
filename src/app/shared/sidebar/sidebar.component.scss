@@ -123,11 +123,12 @@ $link-font-weight: 400;
 }
 
 .mini-details-section {
+  margin-top: auto;
   display: grid;
-
   grid-template-columns: repeat(3, auto);
   align-items: center;
   gap: 5px;
+  height: 100%;
 
   .logo {
     position: relative;

@@ -109,28 +109,18 @@ html {
   }
 }
 
-.p-datepicker {
-  padding: 0.5rem;
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  top: -300px !important;
-  right: -500px;
-  width: 8rem;
-  height: 8rem;
+html,
+body {
+  height: 100%;
 }
-.p-datepicker-container {
-  padding: 0.5rem;
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  top: -300px !important;
-  right: -500px;
-  width: 8rem;
-  height: 8rem;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.p-toast {
+  position: fixed;
+  width: 25rem;
+  height: 1rem;
+  padding: 0;
+}

@@ -36,3 +36,12 @@ export interface UserProfileDTO {
   website?: string;
   isPrivate?: true;
 }
+
+export class UserProfileInfo {
+  constructor(
+    public bio: string,
+    public location: string,
+    public website: string,
+    public birthDate?: Date
+  ) {}
+}

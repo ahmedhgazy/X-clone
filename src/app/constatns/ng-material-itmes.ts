@@ -4,8 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 export const MaterialExamples = [
-  MatDatepickerModule,
   MatFormFieldModule,
-  MatIconModule,
   MatInputModule,
+  MatDatepickerModule,
+  MatIconModule,
 ];

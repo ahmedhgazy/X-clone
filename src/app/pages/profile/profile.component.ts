@@ -1,5 +1,11 @@
 import { CommonModule, formatDate } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Route, Router, RouterModule } from '@angular/router';
 import {
   ProfileService,
@@ -10,6 +16,10 @@ import { Subscription } from 'rxjs';
 import { PRIM_CMP } from '../logout/logout.component';
 import { LoadingSpinner } from '../../shared/loading-spinner/loading-spinner';
 import { AvatarModule } from 'primeng/avatar';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 
 import {
   FormBuilder,
@@ -20,9 +30,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { UserProfileDTO } from '../../models/user.model';
+import { UserProfileDTO, UserProfileInfo } from '../../models/user.model';
 import { MaterialExamples } from '../../constatns/ng-material-itmes';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { userInfo } from 'os';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -36,13 +47,19 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     PRIM_CMP,
     AvatarModule,
     MaterialExamples,
+    ToastModule,
+    ButtonModule,
+    RippleModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), MessageService],
 
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  constructor(private messageService: MessageService) {}
+
   router: Router = inject(Router);
   private fb: FormBuilder;
   pService: ProfileService = inject(ProfileService);
@@ -60,7 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   visible: boolean = false;
   USerProfileDetails: profileResponse;
   formGroup: FormGroup;
-
+  userDate: Date = new Date();
   ngOnInit(): void {
     this.authS.userSub.subscribe((user) => {
       if (user) {
@@ -69,10 +86,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         const userNameWS = user.username.replace(/\s+/g, '');
         this.getFollowers(userNameWS);
       }
-    });
-
-    this.pService.profileDetailsSub.subscribe((data) => {
-      console.log('data is ', data);
     });
 
     this.initForm();
@@ -118,27 +131,39 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const user: UserProfileDTO = {
-      bio: this.formGroup.value.bio,
-      location: this.formGroup.value.location,
-      website: this.formGroup.value.website,
-      birthDate: new Date(this.formGroup.value.birthDate),
-    };
-    this.pService.editProfile(user);
+    let bio = this.formGroup.value.bio;
+    let location = this.formGroup.value.location;
+    let website = this.formGroup.value.website;
+    let birthDate = this.formGroup.value.birthDate;
+    const userInfo = new UserProfileInfo(
+      bio,
+      location,
+      website,
+      new Date(birthDate)
+    );
+    this.pService.editProfile(userInfo);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Your profile updated successfully',
+    });
+    setTimeout(() => {
+      this.visible = false;
+    }, 100);
   }
 
   private initForm() {
     let bio: string = '';
     let location: string = '';
     let website: string = '';
-    let birthDate: Date = new Date();
-
+    let birthDate: string = '';
     const user = JSON.parse(localStorage.getItem('profile'));
     if (user) {
       bio = user.bio;
       location = user.location;
       website = user.website;
       birthDate = user.birthDate;
+      this.birthDate = new Date(birthDate);
     }
 
     this.formGroup = new FormGroup({

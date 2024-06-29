@@ -5,12 +5,12 @@
         <i routerLink="/home" class="pi pi-arrow-left"></i>
       </span>
       <div class="user-info">
-        <h2>{{ name }}</h2>
+        <h2>{{ username }}</h2>
         <span class="posts">{{ posts }} posts</span>
       </div>
     </section>
   </div>
-  <div class="col-12 profile-info">
+  <div class="col-12 profile-info" style="border-bottom: 1px solid #646363">
     <div class="img-upper-side"></div>
 
     <div class="profile-image">
@@ -62,8 +62,12 @@
   </div>
 </div>
 
-<div class="actions">
-  <h1>Let’s get you set up</h1>
+<div class="row">
+  <div class="col-12">
+    <div class="actions py-3">
+      <h1>Let’s get you set up</h1>
+    </div>
+  </div>
 </div>
 <p-dialog
   ngClass="profile"
@@ -85,7 +89,7 @@
       <input
         pInputText
         id="name"
-        [(ngModel)]="name"
+        [ngModel]="name"
         minlength="1"
         class="name"
         maxlength="20"
@@ -140,23 +144,17 @@
           }}</a></span
         >
       </p>
-      <p class="" *ngIf="birthDate">{{ createdAt }} | date : "mediumDate"</p>
-    </div>
 
-    <div class="mb-2 d-flex">
-      <!-- <input formControlName="birthDate" type="date" class="form-control" /> -->
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker">
-        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <p class="" *ngIf="birthDate">{{ birthDate | date : "mediumDate" }}</p>
     </div>
+    <section class="mb-2" *ngIf="showDate">
+      <input formControlName="birthDate" type="date" class="form-control" />
+    </section>
 
     <button type="submit" class="btn btn-light btn-sm rounded-4 px-4 py-1">
       Save
     </button>
   </form>
 </p-dialog>
+<p-toast />
 <!--End Edit Profile Dialog -->

@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { UserInfo, UserActions, UserProfileDTO } from '../../models/user.model';
+import {
+  UserInfo,
+  UserActions,
+  UserProfileDTO,
+  UserProfileInfo,
+} from '../../models/user.model';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Subject } from 'rxjs';
 
@@ -35,7 +40,7 @@ export class ProfileService {
     return this.http.get<UserActions>(`${this.API}${username}/count`);
   }
 
-  editProfile(user: UserProfileDTO) {
+  editProfile(user: UserProfileInfo) {
     this.http
       .patch<profileResponse>(
         'https://twitter-api-ld6h.onrender.com/profile',
