@@ -1,5 +1,3 @@
-import { Interface } from 'node:readline';
-
 export interface User {
   access_token?: string;
   name?: string;
@@ -30,10 +28,11 @@ export interface UserActions {
   media: 0;
 }
 
-export interface UpdateProfile {
-  bio: string;
-  birthDate: string;
-  location: string;
-  website: string;
-  isPrivate: boolean;
+export interface UserProfileDTO {
+  name?: string;
+  bio?: string;
+  birthDate?: Date;
+  location?: string;
+  website?: string;
+  isPrivate?: true;
 }

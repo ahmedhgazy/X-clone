@@ -92,7 +92,7 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
   }
   private handleAuthError(errorResponse: HttpErrorResponse) {
-    let error = 'Wrong password';
+    let error = 'Something went wrong, please try again later';
     if (!errorResponse.error || !errorResponse.error.error) {
       return throwError(error);
     }

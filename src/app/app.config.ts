@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([UserInterceptor])),
+    provideHttpClient(withInterceptors([UserInterceptor])), provideAnimationsAsync(),
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: UserInterceptor,

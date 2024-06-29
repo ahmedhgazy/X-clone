@@ -33,7 +33,7 @@
         border: 1px solid #646363;
         padding: 3px 10px;
       "
-      ><a (click)="showDialog()">Edit Profile</a></span
+      ><a (click)="editProfile()">Edit Profile</a></span
     >
     <div class="img-bottom-side">
       <section class="user-details">
@@ -65,40 +65,55 @@
 <div class="actions">
   <h1>Let’s get you set up</h1>
 </div>
-<!--Start Edit Profile Dialog -->
 <p-dialog
+  ngClass="profile"
   [modal]="true"
   header="Edit your profile"
   [(visible)]="visible"
   [style]="{ width: '30rem' }"
   [breakpoints]="{ '921px': '75vw', '575px': '90vw' }"
 >
-  <!-- <app-loading class="offset-5"></app-loading> -->
-  <form #form="ngForm" class="offset-2" (ngSubmit)="onSubmit(form)">
-    <div class="mt-1 d-flex" styleClass="dialog-content">
-      <p-floatLabel class="mb-3">
-        <input
-          pInputText
-          name="name"
-          id="name"
-          ngModel
-          minlength="1"
-          maxlength="20"
-          required
-        />
-        <label for="name">Name</label>
-      </p-floatLabel>
+  <ng-template pTemplate="header">
+    <div class="inline-flex align-items-center justify-content-center gap-2">
+      <span class="fw-bold ms-2 mb-3">
+        {{ username }}
+      </span>
     </div>
+  </ng-template>
+  <div class="name-input offset-2 py-2">
     <p-floatLabel>
-      <textarea id="float-input" rows="2" cols="30" pInputTextarea> </textarea>
+      <input
+        pInputText
+        id="name"
+        [(ngModel)]="name"
+        minlength="1"
+        class="name"
+        maxlength="20"
+        [value]="name"
+        required
+      />
+      <label for="name">Name</label>
+    </p-floatLabel>
+  </div>
+  <!-- <app-loading class="offset-5"></app-loading> -->
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="offset-2">
+    <div class="mt-1 d-flex" styleClass="dialog-content"></div>
+    <p-floatLabel>
+      <textarea
+        formControlName="bio"
+        id="float-input"
+        rows="2"
+        cols="30"
+        pInputTextarea
+      >
+      </textarea>
       <label for="float-input">Summary</label>
     </p-floatLabel>
     <p-floatLabel>
       <input
         pInputText
-        name="name"
         id="name"
-        ngModel
+        formControlName="location"
         minlength="1"
         maxlength="20"
         required
@@ -108,10 +123,8 @@
     <p-floatLabel>
       <input
         pInputText
-        name="name"
+        formControlName="website"
         id="name"
-        class="mt-1 mb-1"
-        ngModel
         minlength="1"
         maxlength="20"
         required
@@ -127,17 +140,21 @@
           }}</a></span
         >
       </p>
-      <p class="" *ngIf="birthDate">{{ date }} | date : "mediumDate"</p>
+      <p class="" *ngIf="birthDate">{{ createdAt }} | date : "mediumDate"</p>
     </div>
-    <div class="form-group mb-2 d-flex" *ngIf="showDate">
-      <input type="date" class="form-control" />
+
+    <div class="mb-2 d-flex">
+      <!-- <input formControlName="birthDate" type="date" class="form-control" /> -->
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </div>
-    <button
-      style="display: block; width: 18rem"
-      type="button"
-      class="btn btn-light"
-      type="submit"
-    >
+
+    <button type="submit" class="btn btn-light btn-sm rounded-4 px-4 py-1">
       Save
     </button>
   </form>
