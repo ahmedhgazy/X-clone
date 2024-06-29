@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 import { PRIM_CMP } from '../logout/logout.component';
 import { LoadingSpinner } from '../../shared/loading-spinner/loading-spinner';
 import { AvatarModule } from 'primeng/avatar';
-import { provideNativeDateAdapter } from '@angular/material/core';
 
 import {
   FormBuilder,
@@ -22,13 +21,12 @@ import {
 } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { UserProfileDTO } from '../../models/user.model';
-import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { MaterialExamples } from '../../constatns/ng-material-itmes';
+import { provideNativeDateAdapter } from '@angular/material/core';
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
-    ProfileEditComponent,
     CommonModule,
     RouterModule,
     LoadingSpinner,
@@ -39,6 +37,8 @@ import { MaterialExamples } from '../../constatns/ng-material-itmes';
     AvatarModule,
     MaterialExamples,
   ],
+  providers: [provideNativeDateAdapter()],
+
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
@@ -64,6 +64,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authS.userSub.subscribe((user) => {
       if (user) {
+        // const usernameWithoutSpaces = username.replace(/\s+/g, '');
         this.username = user.username;
         const userNameWS = user.username.replace(/\s+/g, '');
         this.getFollowers(userNameWS);
