@@ -5,15 +5,14 @@ import { AuthService } from '../auth/auth.service';
 import {
   UserInfo,
   UserActions,
-  UserProfileDTO,
   UserProfileInfo,
 } from '../../models/user.model';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Subject } from 'rxjs';
+import { Subject, tap } from 'rxjs';
 
 export interface profileResponse {
   bio?: string;
-  birthDate?: Date;
+  birthDate?: string;
   coverImage?: string;
   createdAt?: string;
   isPrivate?: boolean;
@@ -25,6 +24,7 @@ export interface profileResponse {
 }
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
+  profileSubject = new BehaviorSubject<UserInfo>(null);
   authS: AuthService = inject(AuthService);
   constructor() {}
   private API = 'https://twitter-api-ld6h.onrender.com/profile/';
@@ -46,15 +46,14 @@ export class ProfileService {
         'https://twitter-api-ld6h.onrender.com/profile',
         user
       )
-      .subscribe((response: profileResponse) => {
-        console.log('server response', response);
-
-        this.profileDetailsSub.next(response);
-        this.setItemTLS(response);
-      });
+      .subscribe();
   }
 
-  private setItemTLS(userInfo: profileResponse) {
-    localStorage.setItem('profile', JSON.stringify(userInfo));
-  }
+  // private setItemTLS(userInfo: profileResponse) {
+  //   localStorage.setItem('profile', JSON.stringify(userInfo));
+  // }
+
+  // getProfileInfo() {
+  //   this.http.get(`${this.APIEnv}/username`);
+  // }
 }
