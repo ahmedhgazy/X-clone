@@ -85,14 +85,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authS.userSub.subscribe((user) => {
       if (user) {
-        // const usernameWithoutSpaces = username.replace(/\s+/g, '');
         this.username = user.username;
-        const userNameWS = user.username.replace(/\s+/g, '');
-        this.getFollowers(userNameWS);
       }
+      this.getUserInfo(this.username);
+      this.getFollowers(this.username);
     });
 
-    // this.getUserInfo();
     this.getUserLogo();
     this.initForm();
   }
@@ -105,8 +103,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.showDate = !this.showDate;
   }
 
-  getUserInfo() {
-    this.pService.getUserName(this.username).subscribe((userData) => {
+  getUserInfo(username) {
+    this.pService.getUserName(username).subscribe((userData) => {
       this.pService.profileSubject.next(userData);
       this.createdAt = new Date(userData.createdAt);
     });
