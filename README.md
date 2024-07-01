@@ -1,7 +1,7 @@
 # TwitterClone
 
 
-X-clone (twitter) created using angular v17 and Nest.js (not finished yet!)
+X-clone (twitter) created using Angular v17 - Bootstrap5, PrimeNg and Nest.js (not finished yet!)
 
 # Finished use cases:
 
