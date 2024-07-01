@@ -7,8 +7,8 @@ X-clone (twitter) created using angular v17 and Nest.js (not finished yet!)
 # Finished use cases:
 
 Login-register | logout
-Edit profile | get Followers - Following
-Get Posts and post count
+Edit profile | get Followers - Following |
+Get Posts and post count |
 Create a post
 
 # Samples
