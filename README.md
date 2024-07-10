@@ -1,14 +1,13 @@
 # TwitterClone
 
-# Info:
 
-X-clone (twitter) created using angular v17 and Nest.js (not finished yet!)
+X-clone (twitter) created using Angular v17 - Bootstrap5, PrimeNg and Nest.js (not finished yet!)
 
 # Finished use cases:
 
-Login-register | logout
-Edit profile | get Followers - Following |
-Get Posts and post count |
+Login-register | logout |
+Edit profile | Get Followers - Following |
+Get Posts and posts count |
 Create a post
 
 # Samples
