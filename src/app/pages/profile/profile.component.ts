@@ -1,4 +1,4 @@
-import { CommonModule, formatDate } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -6,11 +6,8 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { Route, Router, RouterModule } from '@angular/router';
-import {
-  ProfileService,
-  profileResponse,
-} from '../../services/profile/profile.service';
+import { Router, RouterModule } from '@angular/router';
+import { ProfileService } from '../../services/profile/profile.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { PRIM_CMP } from '../logout/logout.component';
@@ -30,14 +27,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import {
-  UserInfo,
-  UserProfileDTO,
-  UserProfileInfo,
-} from '../../models/user.model';
+import { UserInfo, UserProfileInfo } from '../../models/user.model';
 import { MaterialExamples } from '../../constatns/ng-material-itmes';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { userInfo } from 'os';
 @Component({
   selector: 'app-profile',
   standalone: true,

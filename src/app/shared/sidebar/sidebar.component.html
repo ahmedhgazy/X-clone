@@ -115,17 +115,47 @@
       placeholder="what happens?!"
       autofocus
       class="posts"
-      formControlName="post"
+      formControlName="content"
       cols="10"
       rows="2"
     ></textarea>
-
-    <button
-      style="margin-left: -32px; margin-top: 20px"
-      type="submit"
-      class="btn btn-light btn-sm rounded-4 px-4 py-1"
+    <hr
+      style="
+        background-color: #eee;
+        height: 2px;
+        width: 100%;
+        transform: translateX(-30px);
+      "
+    />
+    <div
+      class="submit-section m-0 p-0 d-flex justify-content-between align-items-center"
     >
-      Save
-    </button>
+      <button
+        [disabled]="!formGroup.valid"
+        style="
+          margin-left: -32px;
+          margin-top: 20px;
+          background-color: rgb(29, 155, 240);
+          color: white;
+        "
+        type="submit"
+        class="btn btn-sm rounded-4 px-4 py-1"
+      >
+        Save
+      </button>
+      <div>
+        <label for="input-file" style="cursor: pointer">
+          <i class="pi pi-image" type="file"></i>
+        </label>
+        <input
+          id="input-file"
+          type="file"
+          class="d-none"
+          (change)="onFileChange($event)"
+        />
+      </div>
+    </div>
   </form>
 </p-dialog>
+
+<p-toast />

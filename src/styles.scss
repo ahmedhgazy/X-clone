@@ -10,7 +10,9 @@ body {
   color: white;
   // height: 100vh;
 }
-
+* {
+  scroll-behavior: smooth;
+}
 a {
   text-decoration: none;
   cursor: pointer;

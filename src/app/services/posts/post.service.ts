@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Post } from '../../models/post.model';
 
 export interface PostResponse {
   id: number;
@@ -20,11 +19,10 @@ export class PostService {
   private APIUrl = environment.apiUrl;
   http: HttpClient = inject(HttpClient);
 
-  createPost(post: Post) {
-    this.http
-      .post<PostResponse>('https://twitter-api-ld6h.onrender.com/posts', post)
-      .subscribe((response) => {
-        console.log(response);
-      });
+  createPost(postData: FormData) {
+    return this.http.post<PostResponse>(
+      'https://twitter-api-ld6h.onrender.com/posts',
+      postData
+    );
   }
 }
