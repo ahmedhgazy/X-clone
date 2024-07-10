@@ -5,6 +5,8 @@ import {
   OnDestroy,
   OnInit,
   inject,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ProfileService } from '../../services/profile/profile.service';
@@ -73,7 +75,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   USerProfileDetails: UserInfo;
   formGroup: FormGroup;
   userDate: Date = new Date();
-
   ngOnInit(): void {
     this.authS.userSub.subscribe((user) => {
       if (user) {
@@ -130,12 +131,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     let location = this.formGroup.value.location;
     let website = this.formGroup.value.website;
     let birthDate = this.formGroup.value.birthDate;
-    const userInfo = new UserProfileInfo(
-      bio,
-      location,
-      website,
-      new Date(birthDate)
-    );
+    let userBirthDate = new Date(this.formGroup.value.birthDate);
+    this.userBirthDate = userBirthDate;
+    const userInfo = new UserProfileInfo(bio, location, website, userBirthDate);
     this.pService.editProfile(userInfo);
     this.messageService.add({
       severity: 'success',
@@ -146,6 +144,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.visible = false;
     }, 100);
   }
+
+  userBirthDate: Date;
 
   private initForm() {
     // Initialize the form with empty values or default values
@@ -159,7 +159,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // Fetch user info and set form values
     this.pService.getUserName(this.username).subscribe((userInfo) => {
       if (userInfo) {
+        console.log(userInfo);
         this.setUserFormValues(userInfo);
+        this.userBirthDate = new Date(userInfo.birthDate);
       }
     });
   }
@@ -172,6 +174,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       website: userInfo.website || '',
       birthDate: userInfo.birthDate || '',
     });
+    this.birthDate = new Date(userInfo.birthDate);
 
     this.birthDate = new Date(userInfo.birthDate);
   }
