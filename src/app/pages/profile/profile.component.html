@@ -40,20 +40,21 @@
         <section class="user-details">
           <h5>{{ name }}</h5>
           <p>{{ username }}</p>
-          <p class="mt-1">
+          <p class="mt-1" style="margin: 0; align-content: center">
             <i class="pi pi-calendar"></i>
             Joined {{ userInfo.createdAt | date : "mediumDate" }}
           </p>
         </section>
+        <div class="follow mt-2">
+          <a class="me-3"
+            ><span>{{ userActions.following }}</span> Following
+          </a>
+          <a
+            ><span>{{ userActions.followers }}</span> Followers
+          </a>
+        </div>
       </div>
-      <div class="follow">
-        <a
-          ><span>{{ userActions.following }}</span> Following
-        </a>
-        <a
-          ><span>{{ userActions.followers }}</span> Followers
-        </a>
-      </div>
+
       <ul class="links mt-1">
         <li><a>Posts</a></li>
         <li><a>Replies</a></li>
