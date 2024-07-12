@@ -5,8 +5,8 @@ import { MainContent } from './pages/main-content/main-content.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './services/auth/auth.guard';
-import { ProfileEditComponent } from './pages/profile/profile-edit/profile-edit.component';
 import { NotificationComponent } from './pages/notification/notification.component';
+import { resolve } from './services//profile/profile-data.resolver';
 
 export const routes: Routes = [
   {
@@ -25,6 +25,7 @@ export const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        resolve: { profileData: resolve },
       },
     ],
   },

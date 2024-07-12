@@ -36,7 +36,7 @@ export class ProfileService {
     return this.http.get<UserInfo>(`${this.API}${username}`);
   }
 
-  getFollowers(username: string) {
+  getUserActions(username: string) {
     return this.http.get<UserActions>(`${this.API}${username}/count`);
   }
 
@@ -48,12 +48,4 @@ export class ProfileService {
       )
       .subscribe();
   }
-
-  // private setItemTLS(userInfo: profileResponse) {
-  //   localStorage.setItem('profile', JSON.stringify(userInfo));
-  // }
-
-  // getProfileInfo() {
-  //   this.http.get(`${this.APIEnv}/username`);
-  // }
 }

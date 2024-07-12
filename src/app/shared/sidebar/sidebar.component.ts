@@ -42,9 +42,9 @@ export class LeftSidebarComponent implements OnInit {
     this.initForm();
   }
 
-  navToProfile() {
-    this.router.navigate(['/profile']);
-  }
+  // navToProfile() {
+  //   this.router.navigate(['/profile']);
+  // }
 
   logOut() {
     this.router.navigate(['/logout']);

@@ -5,10 +5,8 @@ import {
   OnDestroy,
   OnInit,
   inject,
-  ViewChild,
-  ElementRef,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProfileService } from '../../services/profile/profile.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
@@ -19,9 +17,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -29,9 +25,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { UserInfo, UserProfileInfo } from '../../models/user.model';
+import {
+  UserActions,
+  UserInfo,
+  UserProfileInfo,
+} from '../../models/user.model';
 import { MaterialExamples } from '../../constatns/ng-material-itmes';
 import { provideNativeDateAdapter } from '@angular/material/core';
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -50,21 +51,19 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     RippleModule,
   ],
   providers: [provideNativeDateAdapter(), MessageService],
-
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss',
+  styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private messageService: MessageService) {}
   router: Router = inject(Router);
-  private fb: FormBuilder;
   pService: ProfileService = inject(ProfileService);
   authS: AuthService = inject(AuthService);
   sub$: Subscription[] = [];
-  username = this.authS.userSub.getValue().username;
-  name = this.authS.userSub.getValue().name;
-  LogoChar;
+  username: string;
+  name: string;
+  LogoChar: string;
   followers: number;
   following: number;
   posts: number;
@@ -75,17 +74,26 @@ export class ProfileComponent implements OnInit, OnDestroy {
   USerProfileDetails: UserInfo;
   formGroup: FormGroup;
   userDate: Date = new Date();
+  userActions: UserActions;
+  userInfo: UserInfo;
+  route: ActivatedRoute = inject(ActivatedRoute);
+  isExist = false;
   ngOnInit(): void {
-    this.authS.userSub.subscribe((user) => {
-      if (user) {
-        this.username = user.username;
-      }
-      this.getUserInfo(this.username);
-      this.getFollowers(this.username);
-    });
+    this.route.data.subscribe(
+      (data: {
+        profileData: { userActions: UserActions; userInfo: UserInfo };
+      }) => {
+        this.isExist = !!data;
+        console.log(this.isExist);
 
-    this.getUserLogo();
-    this.initForm();
+        this.userActions = data.profileData.userActions;
+        this.userInfo = data.profileData.userInfo;
+        this.username = this.authS.userSub.getValue().username;
+        this.name = this.authS.userSub.getValue().name;
+        this.initForm();
+        this.getUserLogo();
+      }
+    );
   }
 
   editProfile() {
@@ -96,43 +104,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.showDate = !this.showDate;
   }
 
-  getUserInfo(username) {
-    this.pService.getUserName(username).subscribe((userData) => {
-      this.pService.profileSubject.next(userData);
-      this.createdAt = new Date(userData.createdAt);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.sub$.forEach((sub) => sub.unsubscribe());
-  }
-
   getUserLogo() {
     const USERNAME = this.authS.userSub.getValue().username;
     const firstLetter = USERNAME.charAt(0);
     this.LogoChar = firstLetter;
   }
 
-  getFollowers(username: string) {
-    this.pService.getFollowers(username).subscribe(
-      (userInfo) => {
-        this.followers = userInfo.followers;
-        this.following = userInfo.following;
-        this.posts = userInfo.posts;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
   onSubmit() {
-    let bio = this.formGroup.value.bio;
-    let location = this.formGroup.value.location;
-    let website = this.formGroup.value.website;
-    let birthDate = this.formGroup.value.birthDate;
-    let userBirthDate = new Date(this.formGroup.value.birthDate);
-    this.userBirthDate = userBirthDate;
+    const bio = this.formGroup.value.bio;
+    const location = this.formGroup.value.location;
+    const website = this.formGroup.value.website;
+    const userBirthDate = new Date(this.formGroup.value.birthDate);
     const userInfo = new UserProfileInfo(bio, location, website, userBirthDate);
     this.pService.editProfile(userInfo);
     this.messageService.add({
@@ -145,37 +127,26 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  userBirthDate: Date;
-
   private initForm() {
-    // Initialize the form with empty values or default values
     this.formGroup = new FormGroup({
-      bio: new FormControl('', Validators.required),
-      location: new FormControl('', Validators.required),
-      website: new FormControl('', Validators.required),
-      birthDate: new FormControl('', Validators.required),
+      bio: new FormControl(this.userInfo?.bio || '', Validators.required),
+      location: new FormControl(
+        this.userInfo?.location || '',
+        Validators.required
+      ),
+      website: new FormControl(
+        this.userInfo?.website || '',
+        Validators.required
+      ),
+      birthDate: new FormControl(
+        this.userInfo?.birthDate || '',
+        Validators.required
+      ),
     });
-
-    // Fetch user info and set form values
-    this.pService.getUserName(this.username).subscribe((userInfo) => {
-      if (userInfo) {
-        console.log(userInfo);
-        this.setUserFormValues(userInfo);
-        this.userBirthDate = new Date(userInfo.birthDate);
-      }
-    });
+    this.birthDate = new Date(this.userInfo?.birthDate);
   }
 
-  // Separate method to set form values
-  private setUserFormValues(userInfo: any) {
-    this.formGroup.setValue({
-      bio: userInfo.bio || '',
-      location: userInfo.location || '',
-      website: userInfo.website || '',
-      birthDate: userInfo.birthDate || '',
-    });
-    this.birthDate = new Date(userInfo.birthDate);
-
-    this.birthDate = new Date(userInfo.birthDate);
+  ngOnDestroy(): void {
+    this.sub$.forEach((sub) => sub.unsubscribe());
   }
 }
