@@ -14,7 +14,6 @@ import { log } from 'node:console';
 export class PostComponent implements OnInit {
   @Input() post: UserPost;
   @Input() username: string;
-  @Input() postId: string;
   createdAt: Date;
   PS: ProfileService = inject(ProfileService);
   logo: string;

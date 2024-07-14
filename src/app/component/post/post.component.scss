@@ -1,17 +1,40 @@
 $main-transition: all 0.4s ease-in-out;
-$posts-details-button-background: rgb(29, 155, 240, 0.2);
+$posts-details-button-background: rgba(29, 155, 240, 0.2);
 $posts-details-button-color: rgb(29, 155, 240);
+$icon-color: #71767b;
+$icon-padding: 10px;
+$first-link-hover-bg: rgba(29, 155, 240, 0.2);
+$first-link-hover-color: rgb(29, 155, 240);
+$second-link-hover-bg: rgba(0, 128, 0, 0.3);
+$second-link-hover-color: green;
+$third-link-hover-bg: rgba(255, 0, 0, 0.2);
+$third-link-hover-color: red;
+$main-margin: 1rem;
+$main-margin-left: calc(30px + 0.5rem);
+@mixin icon {
+  border-radius: 50%;
+  transition: $main-transition;
+  color: $icon-color;
+}
+
 ul {
   padding: 0;
   margin: 0;
+
+  li:not(:last-child) {
+    i,
+    span {
+      @include icon();
+      padding: 3px;
+    }
+  }
 }
 
-i,
-li span {
-  transition: $main-transition;
-  border-radius: 50%;
-  padding: 8px;
-  color: #71767b;
+i.book,
+i.share,
+i.more {
+  @include icon();
+  padding: $icon-padding;
 }
 
 .more:hover {
@@ -20,49 +43,84 @@ li span {
 }
 
 ul.actions {
+  margin-left: $main-margin-left;
   li {
-    // First link
     &:nth-child(1) a:hover,
     &:nth-child(4) a:hover {
       i {
-        background-color: $posts-details-button-background;
-        color: $posts-details-button-color;
+        background-color: $first-link-hover-bg;
+        color: $first-link-hover-color;
       }
       span {
-        color: $posts-details-button-color;
+        color: $first-link-hover-color;
       }
     }
 
-    // Second link
     &:nth-child(2) a:hover {
       i {
-        background-color: rgb(0, 128, 0, 0.3);
-        color: green;
+        background-color: $second-link-hover-bg;
+        color: $second-link-hover-color;
       }
       span {
-        color: green;
+        color: $second-link-hover-color;
       }
     }
 
-    // Third link
     &:nth-child(3) a:hover {
       i {
-        background-color: rgb(255, 0, 0, 0.2);
-        color: red;
+        background-color: $third-link-hover-bg;
+        color: $third-link-hover-color;
       }
       span {
-        color: red;
+        color: $third-link-hover-color;
       }
     }
+
     &:nth-child(5) a {
-      i.book:hover {
-        background-color: $posts-details-button-background;
-        color: $posts-details-button-color;
-      }
+      i.book:hover,
       i.share:hover {
         background-color: $posts-details-button-background;
         color: $posts-details-button-color;
       }
     }
   }
+}
+
+.post-wrapper {
+  border: 1px solid #333639;
+  padding: 2rem 0.1rem;
+}
+
+.user-info {
+  .logo-img {
+    width: 30px;
+    height: 30px;
+    position: relative;
+
+    .image-wrapper {
+      background-color: #00897b;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      z-index: -1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span.logo {
+        color: #fff;
+      }
+    }
+  }
+
+  .username,
+  span {
+    color: $icon-color;
+  }
+}
+
+.post-content {
+  margin-top: $main-margin;
+  margin-bottom: $main-margin;
+  margin-left: $main-margin-left;
 }

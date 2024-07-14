@@ -1,6 +1,6 @@
 @if(userPosts){ @if(userPosts.length!==0) { @for (post of userPosts; track
 $index) {
-<app-post [post]="post" [username]="username" [postId]="post.id"></app-post>
+<app-post [post]="post" [username]="username"></app-post>
 } } @else {
 <div class="row">
   <div class="col-12">
