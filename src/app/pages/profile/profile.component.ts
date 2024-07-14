@@ -212,7 +212,7 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProfileService } from '../../services/profile/profile.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PRIM_CMP } from '../logout/logout.component';
 import { LoadingSpinner } from '../../shared/loading-spinner/loading-spinner';
 import { AvatarModule } from 'primeng/avatar';
@@ -234,8 +234,9 @@ import {
   UserInfo,
   UserProfileInfo,
 } from '../../models/user.model';
-import { MaterialExamples } from '../../constatns/ng-material-itmes';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { PostsComponent } from './posts/posts.component';
+import { UserPosts } from '../../models/post.model';
 
 @Component({
   selector: 'app-profile',
@@ -249,10 +250,10 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     FormsModule,
     PRIM_CMP,
     AvatarModule,
-    MaterialExamples,
     ToastModule,
     ButtonModule,
     RippleModule,
+    PostsComponent,
   ],
   providers: [provideNativeDateAdapter(), MessageService],
   templateUrl: './profile.component.html',
@@ -309,9 +310,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getUserLogo() {
-    const USERNAME = this.authS.userSub.getValue().username;
-    const firstLetter = USERNAME.charAt(0);
-    this.LogoChar = firstLetter;
+    this.LogoChar = this.pService.getUserLogo(this.username);
   }
 
   onSubmit() {
@@ -350,6 +349,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
 
     this.birthDate = new Date(this.userInfo?.birthDate);
+  }
+
+  navtoPosts() {
+    this.router.navigate(['/'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {

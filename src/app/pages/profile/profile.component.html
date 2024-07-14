@@ -1,165 +1,179 @@
-<ng-container>
-  <div class="row">
-    <div class="col-12">
-      <section class="header">
-        <span class="p-1">
-          <i routerLink="/home" class="pi pi-arrow-left"></i>
-        </span>
-        <div class="user-info">
-          <h2>{{ username }}</h2>
-          <span class="posts">{{ posts }} posts</span>
-        </div>
-      </section>
-    </div>
-    <div class="col-12 profile-info" style="border-bottom: 1px solid #646363">
-      <div class="img-upper-side"></div>
-
-      <div class="profile-image">
-        <div class="wrraper">
-          <span class="logo">
-            {{ LogoChar }}
-          </span>
-        </div>
+<div class="row">
+  <div class="col-12">
+    <section class="header">
+      <span class="p-1">
+        <i routerLink="/home" class="pi pi-arrow-left"></i>
+      </span>
+      <div class="user-info">
+        <h2>{{ username }}</h2>
+        <span class="posts">{{ posts }} posts</span>
       </div>
-      <span
-        style="
-          position: absolute;
-          right: 20px;
-          top: 205px;
-          color: #eff3f4;
-          font-weight: 700;
-          border-radius: 20px;
-          line-height: 20px;
-          font-size: 15px;
-          border: 1px solid #646363;
-          padding: 3px 10px;
-        "
-        ><a (click)="editProfile()">Edit Profile</a></span
+    </section>
+  </div>
+  <div class="col-12 profile-info" style="border-bottom: 1px solid #646363">
+    <div class="img-upper-side"></div>
+
+    <div class="profile-image">
+      <div class="wrraper">
+        <span class="logo">
+          {{ LogoChar }}
+        </span>
+      </div>
+    </div>
+    <span
+      style="
+        position: absolute;
+        right: 20px;
+        top: 205px;
+        color: #eff3f4;
+        font-weight: 700;
+        border-radius: 20px;
+        line-height: 20px;
+        font-size: 15px;
+        border: 1px solid #646363;
+        padding: 3px 10px;
+      "
+      ><a (click)="editProfile()">Edit Profile</a></span
+    >
+    <div class="img-bottom-side">
+      <section class="user-details">
+        <h5>{{ name }}</h5>
+        <p>{{ username }}</p>
+        <p class="mt-1" style="margin: 0; align-content: center">
+          <i class="pi pi-calendar"></i>
+          Joined {{ userInfo.createdAt | date : "mediumDate" }}
+        </p>
+      </section>
+      <div class="follow mt-2">
+        <a class="me-3"
+          ><span>{{ userActions.following }}</span> Following
+        </a>
+        <a
+          ><span>{{ userActions.followers }}</span> Followers
+        </a>
+      </div>
+    </div>
+
+    <!-- *User Actions  -->
+
+    <ul class="links mt-1">
+      <li
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
       >
-      <div class="img-bottom-side">
-        <section class="user-details">
-          <h5>{{ name }}</h5>
-          <p>{{ username }}</p>
-          <p class="mt-1" style="margin: 0; align-content: center">
-            <i class="pi pi-calendar"></i>
-            Joined {{ userInfo.createdAt | date : "mediumDate" }}
-          </p>
-        </section>
-        <div class="follow mt-2">
-          <a class="me-3"
-            ><span>{{ userActions.following }}</span> Following
-          </a>
-          <a
-            ><span>{{ userActions.followers }}</span> Followers
-          </a>
-        </div>
-      </div>
-
-      <ul class="links mt-1">
-        <li><a>Posts</a></li>
-        <li><a>Replies</a></li>
-        <li><a>Media</a></li>
-        <li><a>Links</a></li>
-      </ul>
-    </div>
+        <a routerLink="/profile">Posts</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/profile/replies">Replies</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/profile/media">Media</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/profile/likes">Likes</a>
+      </li>
+    </ul>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-12">
-      <div class="actions py-3">
-        <h1>Let’s get you set up</h1>
-      </div>
-    </div>
+<!--*User Actions  -->
+<div class="row">
+  <div class="col-12" style="height: 100%; width: 100%">
+    <router-outlet></router-outlet>
   </div>
-  <p-dialog
-    ngClass="profile"
-    [modal]="true"
-    header="Edit your profile"
-    [(visible)]="visible"
-    [style]="{ width: '30rem' }"
-    [breakpoints]="{ '921px': '75vw', '575px': '90vw' }"
-  >
-    <ng-template pTemplate="header">
-      <div class="inline-flex align-items-center justify-content-center gap-2">
-        <span class="fw-bold ms-2 mb-3">
-          {{ username }}
-        </span>
-      </div>
-    </ng-template>
-    <div class="name-input offset-2 py-2">
-      <p-floatLabel>
-        <input
-          pInputText
-          id="name"
-          [ngModel]="name"
-          minlength="1"
-          class="name"
-          maxlength="20"
-          [value]="name"
-          required
-        />
-        <label for="name">Name</label>
-      </p-floatLabel>
+</div>
+
+<!-- *Edit profile dialog -->
+<p-dialog
+  ngClass="profile"
+  [modal]="true"
+  header="Edit your profile"
+  [(visible)]="visible"
+  [style]="{ width: '30rem' }"
+  [breakpoints]="{ '921px': '75vw', '575px': '90vw' }"
+>
+  <ng-template pTemplate="header">
+    <div class="inline-flex align-items-center justify-content-center gap-2">
+      <span class="fw-bold ms-2 mb-3">
+        {{ username }}
+      </span>
     </div>
-    <!-- <app-loading class="offset-5"></app-loading> -->
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="offset-2">
-      <div class="mt-1 d-flex" styleClass="dialog-content"></div>
-      <p-floatLabel>
-        <textarea
-          formControlName="bio"
-          id="float-input"
-          rows="2"
-          cols="30"
-          pInputTextarea
+  </ng-template>
+  <div class="name-input offset-2 py-2">
+    <p-floatLabel>
+      <input
+        pInputText
+        id="name"
+        [ngModel]="name"
+        minlength="1"
+        class="name"
+        maxlength="20"
+        [value]="name"
+        required
+      />
+      <label for="name">Name</label>
+    </p-floatLabel>
+  </div>
+  <!-- <app-loading class="offset-5"></app-loading> -->
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="offset-2">
+    <div class="mt-1 d-flex" styleClass="dialog-content"></div>
+    <p-floatLabel>
+      <textarea
+        formControlName="bio"
+        id="float-input"
+        rows="2"
+        cols="30"
+        pInputTextarea
+      >
+      </textarea>
+      <label for="float-input">Summary</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input
+        pInputText
+        id="name"
+        formControlName="location"
+        minlength="1"
+        maxlength="20"
+        required
+      />
+      <label for="name">Location</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input
+        pInputText
+        formControlName="website"
+        id="name"
+        minlength="1"
+        maxlength="20"
+        required
+      />
+      <label for="name">Website</label>
+    </p-floatLabel>
+    <div class="mt-2">
+      <p>
+        <span class="fw-bold"> BirthDate . </span>
+        <span style="color: #1677b8"
+          ><a (click)="toggleDateMode()">{{
+            showDate ? "Cancel" : "Edit"
+          }}</a></span
         >
-        </textarea>
-        <label for="float-input">Summary</label>
-      </p-floatLabel>
-      <p-floatLabel>
-        <input
-          pInputText
-          id="name"
-          formControlName="location"
-          minlength="1"
-          maxlength="20"
-          required
-        />
-        <label for="name">Location</label>
-      </p-floatLabel>
-      <p-floatLabel>
-        <input
-          pInputText
-          formControlName="website"
-          id="name"
-          minlength="1"
-          maxlength="20"
-          required
-        />
-        <label for="name">Website</label>
-      </p-floatLabel>
-      <div class="mt-2">
-        <p>
-          <span class="fw-bold"> BirthDate . </span>
-          <span style="color: #1677b8"
-            ><a (click)="toggleDateMode()">{{
-              showDate ? "Cancel" : "Edit"
-            }}</a></span
-          >
-        </p>
+      </p>
 
-        <p class="" *ngIf="birthDate">
-          {{ birthDate | date : "mediumDate" }}
-        </p>
-      </div>
-      <section class="mb-2" *ngIf="showDate">
-        <input formControlName="birthDate" type="date" class="form-control" />
-      </section>
+      <p class="" *ngIf="birthDate">
+        {{ birthDate | date : "mediumDate" }}
+      </p>
+    </div>
+    <section class="mb-2" *ngIf="showDate">
+      <input formControlName="birthDate" type="date" class="form-control" />
+    </section>
 
-      <button type="submit" class="btn btn-light btn-sm rounded-4 px-4 py-1">
-        Save
-      </button>
-    </form>
-  </p-dialog>
-  <p-toast />
-  <!--End Edit Profile Dialog -->
-</ng-container>
+    <button type="submit" class="btn btn-light btn-sm rounded-4 px-4 py-1">
+      Save
+    </button>
+  </form>
+</p-dialog>
+<p-toast />
+<!--End Edit Profile Dialog -->
+<hr />

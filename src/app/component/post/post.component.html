@@ -1,0 +1,75 @@
+<div class="post-wrapper py-2 px-4" style="border: 1px solid #333639">
+  <div class="mb-2 header d-flex align-items-center justify-content-between">
+    <section class="user-info d-flex align-items-center gap-2">
+      <div style="width: 30px; height: 30px" class="logo-img poistion-relative">
+        <div
+          class="image-wrapper"
+          style="
+            background-color: #00897b;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            z-index: -1;
+            position: relative;
+          "
+        >
+          <span
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            "
+            >{{ logo }}</span
+          >
+        </div>
+      </div>
+      <div class="username" style="color: #71767b">{{ username }}</div>
+      <span style="color: #71767b">{{ createdAt | date : "mediumDate" }}</span>
+    </section>
+
+    <div class="icon">
+      <i style="cursor: pointer" class="more pi pi-ellipsis-h"></i>
+    </div>
+  </div>
+  <div class="post-content mt-1">{{ post.content }}</div>
+
+  <div class="footer mt-2">
+    <ul
+      class="actions list-unstyled d-flex justify-content-between align-items-center"
+    >
+      <li>
+        <a>
+          <i class="pi pi-comment"></i>
+          <span>54</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <i class="fa-solid fa-repeat"></i>
+          <span>54</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <i class="pi pi-heart"></i>
+          <span>0</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <i class="pi pi-chart-bar"></i>
+          <span>54</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <i class="pi pi-bookmark book"> </i>
+          <i class="pi pi-upload share"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

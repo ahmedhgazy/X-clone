@@ -8,7 +8,9 @@ import {
   UserProfileInfo,
 } from '../../models/user.model';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Subject, tap } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
+import { UserPost, UserPosts } from '../../models/post.model';
+import { ReturnStatement } from '@angular/compiler';
 
 export interface profileResponse {
   bio?: string;
@@ -32,7 +34,7 @@ export class ProfileService {
   http: HttpClient = inject(HttpClient);
   profileDetailsSub = new BehaviorSubject<profileResponse>(null);
 
-  getUserName(username) {
+  getUserInfo(username) {
     return this.http.get<UserInfo>(`${this.API}${username}`);
   }
 
@@ -47,5 +49,20 @@ export class ProfileService {
         user
       )
       .subscribe();
+  }
+
+  getUserPosts(username: string) {
+    return this.http.get<UserPost[]>(`${this.API}${username}/posts`);
+  }
+
+  getUserLogo(username) {
+    const firstLetter = username.charAt(0);
+    return firstLetter;
+  }
+
+  getPostLikes(id: string) {
+    return this.http.get<any>(
+      `https://twitter-api-ld6h.onrender.com/likes/${id}`
+    );
   }
 }
