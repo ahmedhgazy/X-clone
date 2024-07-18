@@ -1,0 +1,15 @@
+<ng-container *ngIf="userPosts$ | async as userPosts">
+  <ng-container *ngIf="userPosts.length !== 0">
+    <section *ngFor="let post of userPosts; let i = index">
+      <app-post [post]="post" [username]="username"></app-post>
+    </section>
+  </ng-container>
+
+  <div class="row" *ngIf="userPosts.length == 0">
+    <div class="col-12">
+      <div class="actions py-3">
+        <h1>Let’s get you set up</h1>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -2,14 +2,15 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { UserPost } from '../../models/post.model';
 import { ProfileService } from '../../services/profile/profile.service';
 import { CommonModule } from '@angular/common';
-import { log } from 'node:console';
+import { TextDirectionDirective } from '../../shared/directives/text-direction.directive';
+import { getTextDirection } from '../../shared/utilities/text-direction';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TextDirectionDirective],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.scss',
+  styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
   @Input() post: UserPost;
@@ -18,10 +19,12 @@ export class PostComponent implements OnInit {
   PS: ProfileService = inject(ProfileService);
   logo: string;
 
-  PostLikes: any;
   ngOnInit(): void {
     this.logo = this.PS.getUserLogo(this.username);
-    this.createdAt = new Date(this.post.createdAt);
-    this.PS.getPostLikes(this.post.id).subscribe();
+    this.createdAt = new Date(this.post.post.createdAt);
+  }
+
+  getTextDirection(text: string): 'rtl' | 'ltr' {
+    return getTextDirection(text);
   }
 }

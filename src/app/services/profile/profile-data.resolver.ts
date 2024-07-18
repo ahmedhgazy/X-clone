@@ -12,7 +12,6 @@ export const resolve = () => {
   }
 
   const username = user.username;
-
   return forkJoin({
     userActions: ps.getUserActions(username).pipe(
       catchError((error) => {
@@ -23,6 +22,7 @@ export const resolve = () => {
     userInfo: ps.getUserInfo(username).pipe(
       catchError((error) => {
         console.error('Error fetching user info:', error);
+
         return of(null); // Return an empty Observable in case of error
       })
     ),

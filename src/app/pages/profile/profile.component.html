@@ -1,82 +1,85 @@
-<div class="row">
-  <div class="col-12">
-    <section class="header">
-      <span class="p-1">
-        <i routerLink="/home" class="pi pi-arrow-left"></i>
-      </span>
-      <div class="user-info">
-        <h2>{{ username }}</h2>
-        <span class="posts">{{ posts }} posts</span>
-      </div>
-    </section>
-  </div>
-  <div class="col-12 profile-info" style="border-bottom: 1px solid #646363">
-    <div class="img-upper-side"></div>
-
-    <div class="profile-image">
-      <div class="wrraper">
-        <span class="logo">
-          {{ LogoChar }}
+<ng-container *ngIf="userActions$ | async as userActions">
+  <div class="row" *ngIf="userInfo$ | async as userInfo">
+    <div class="col-12">
+      <section class="header">
+        <span class="p-1">
+          <i routerLink="/home" class="pi pi-arrow-left"></i>
         </span>
-      </div>
-    </div>
-    <span
-      style="
-        position: absolute;
-        right: 20px;
-        top: 205px;
-        color: #eff3f4;
-        font-weight: 700;
-        border-radius: 20px;
-        line-height: 20px;
-        font-size: 15px;
-        border: 1px solid #646363;
-        padding: 3px 10px;
-      "
-      ><a (click)="editProfile()">Edit Profile</a></span
-    >
-    <div class="img-bottom-side">
-      <section class="user-details">
-        <h5>{{ name }}</h5>
-        <p>{{ username }}</p>
-        <p class="mt-1" style="margin: 0; align-content: center">
-          <i class="pi pi-calendar"></i>
-          Joined {{ userInfo.createdAt | date : "mediumDate" }}
-        </p>
+        <div class="user-info">
+          <h2>{{ user.username }}</h2>
+          <span class="posts">{{ userActions.posts }} posts</span>
+        </div>
       </section>
-      <div class="follow mt-2">
-        <a class="me-3"
-          ><span>{{ userActions.following }}</span> Following
-        </a>
-        <a
-          ><span>{{ userActions.followers }}</span> Followers
-        </a>
-      </div>
     </div>
+    <div class="col-12 profile-info" style="border-bottom: 1px solid #646363">
+      <div class="img-upper-side"></div>
 
-    <!-- *User Actions  -->
-
-    <ul class="links mt-1">
-      <li
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        routerLinkActive="active"
+      <div class="profile-image">
+        <div class="wrraper">
+          <span class="logo">
+            {{ LogoChar }}
+          </span>
+        </div>
+      </div>
+      <span
+        style="
+          position: absolute;
+          right: 20px;
+          top: 205px;
+          color: #eff3f4;
+          font-weight: 700;
+          border-radius: 20px;
+          line-height: 20px;
+          font-size: 15px;
+          border: 1px solid #646363;
+          padding: 3px 10px;
+        "
+        ><a (click)="editProfile()">Edit Profile</a></span
       >
-        <a routerLink="/profile">Posts</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/profile/replies">Replies</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/profile/media">Media</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/profile/likes">Likes</a>
-      </li>
-    </ul>
-  </div>
-</div>
+      <div class="img-bottom-side">
+        <section class="user-details">
+          <h5>{{ user.name }}</h5>
+          <p>{{ user.username }}</p>
+          <p class="mt-1" style="margin: 0; align-content: center">
+            <i class="pi pi-calendar"></i>
+            Joined {{ userInfo.createdAt | date : "mediumDate" }}
+          </p>
+        </section>
+        <div class="follow mt-2">
+          <a class="me-3"
+            ><span>{{ userActions.following }}</span> Following
+          </a>
+          <a
+            ><span>{{ userActions.followers }}</span> Followers
+          </a>
+        </div>
+      </div>
 
+      <!-- *User Actions  -->
+
+      <ul class="links mt-1">
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          <a routerLink="/profile">Posts</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/profile/replies">Replies</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/profile/media">Media</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/profile/likes">Likes</a>
+        </li>
+      </ul>
+    </div>
+    <!-- </ng-container> -->
+    <!-- </ng-container> -->
+  </div>
+</ng-container>
 <!--*User Actions  -->
 <div class="row">
   <div class="col-12" style="height: 100%; width: 100%">
@@ -96,7 +99,7 @@
   <ng-template pTemplate="header">
     <div class="inline-flex align-items-center justify-content-center gap-2">
       <span class="fw-bold ms-2 mb-3">
-        {{ username }}
+        {{ user.username }}
       </span>
     </div>
   </ng-template>
@@ -105,11 +108,11 @@
       <input
         pInputText
         id="name"
-        [ngModel]="name"
+        [ngModel]="user.name"
         minlength="1"
         class="name"
         maxlength="20"
-        [value]="name"
+        [value]="user.name"
         required
       />
       <label for="name">Name</label>

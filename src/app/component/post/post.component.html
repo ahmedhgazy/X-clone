@@ -1,4 +1,8 @@
-<div class="post-wrapper py-2 px-2" style="border: 1px solid #333639">
+<div
+  style="height: 100%"
+  class="post-wrapper py-2 px-2"
+  style="border: 1px solid #333639"
+>
   <div class="mb-2 header d-flex align-items-center justify-content-between">
     <section class="user-info d-flex align-items-center gap-2">
       <div style="width: 30px; height: 30px" class="logo-img poistion-relative">
@@ -7,12 +11,20 @@
         </div>
       </div>
       <div class="username">{{ username }}</div>
-      <span>{{ createdAt | date : "mediumDate" }}</span>
+      <span>{{ post.post.createdAt | date : "mediumDate" }}</span>
     </section>
 
     <i style="cursor: pointer" class="more pi pi-ellipsis-h"></i>
   </div>
-  <div class="post-content">{{ post.content }}</div>
+  <div
+    class="post-content"
+    [ngStyle]="{
+      direction: getTextDirection(post.post.content),
+      'unicode-bidi': 'plaintext'
+    }"
+  >
+    {{ post.post.content }}
+  </div>
 
   <div class="footer mt-2">
     <ul
@@ -33,7 +45,7 @@
       <li>
         <a>
           <i class="pi pi-heart"></i>
-          <span>0</span>
+          <span>{{ post.likes }}</span>
         </a>
       </li>
       <li>

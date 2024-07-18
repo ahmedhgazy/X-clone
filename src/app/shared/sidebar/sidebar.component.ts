@@ -8,6 +8,8 @@ import { PostService } from '../../services/posts/post.service';
 import { MessageService } from 'primeng/api';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ToastModule } from 'primeng/toast';
+import { map, tap } from 'rxjs';
+import { UserPost } from '../../models/post.model';
 
 @Component({
   selector: 'app-LSidebar',
@@ -75,6 +77,31 @@ export class LeftSidebarComponent implements OnInit {
     }
   }
 
+  // onSubmit() {
+  //   const formData = new FormData();
+  //   formData.append('content', this.formGroup.get('content')?.value || '');
+
+  //   for (let i = 0; i < this.selectedFiles.length; i++) {
+  //     formData.append(
+  //       'images',
+  //       this.selectedFiles[i],
+  //       this.selectedFiles[i].name
+  //     );
+  //   }
+
+  //   this.postService.createPost(formData).subscribe((UserPost) => {
+  //     this.messageService.add({
+  //       severity: 'success',
+  //       summary: 'Success',
+  //       detail: 'Post created',
+  //     });
+
+  //     this.profileS.getUserPosts(this.userName).subscribe();
+  //   });
+
+  //   this.formGroup.reset();
+  // }
+
   onSubmit() {
     const formData = new FormData();
     formData.append('content', this.formGroup.get('content')?.value || '');
@@ -87,16 +114,15 @@ export class LeftSidebarComponent implements OnInit {
       );
     }
 
-    console.log('FormData:', formData);
-
-    this.postService.createPost(formData).subscribe((response) => {
-      console.log(response);
+    this.postService.createPost(formData).subscribe((newPost: UserPost) => {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
         detail: 'Post created',
       });
+      this.profileS.addUserPost(newPost);
     });
+    this.visible = false;
     this.formGroup.reset();
   }
 }

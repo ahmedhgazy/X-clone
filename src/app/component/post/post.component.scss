@@ -89,6 +89,7 @@ ul.actions {
 .post-wrapper {
   border: 1px solid #333639;
   padding: 2rem 0.1rem;
+  position: relative;
 }
 
 .user-info {
@@ -123,4 +124,7 @@ ul.actions {
   margin-top: $main-margin;
   margin-bottom: $main-margin;
   margin-left: $main-margin-left;
+  height: fit-content;
+  word-break: break-all;
+  word-wrap: break-word;
 }
