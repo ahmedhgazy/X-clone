@@ -19,6 +19,8 @@ Create a post
 ![Alt text](/src/assets/finished/5.PNG)
 ![Alt text](/src/assets/finished/6.PNG)
 ![Alt text](/src/assets/finished/7.PNG)
+![Alt text](/src/assets/finished/post.PNG)
+![Alt text](/src/assets/finishedPost1.PNG)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
