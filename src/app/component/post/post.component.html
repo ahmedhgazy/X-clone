@@ -33,17 +33,17 @@
       <li>
         <a>
           <i class="pi pi-comment"></i>
-          <span>54</span>
+          <span>{{ post.comments }}</span>
         </a>
       </li>
       <li>
         <a>
           <i class="fa-solid fa-repeat"></i>
-          <span>54</span>
+          <span>{{ post.reposts }}</span>
         </a>
       </li>
       <li>
-        <a>
+        <a (click)="like()">
           <i class="pi pi-heart"></i>
           <span>{{ post.likes }}</span>
         </a>

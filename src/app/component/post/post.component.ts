@@ -27,4 +27,13 @@ export class PostComponent implements OnInit {
   getTextDirection(text: string): 'rtl' | 'ltr' {
     return getTextDirection(text);
   }
+
+  like() {
+    if (!this.post) {
+      return;
+    }
+    this.PS.like(this.post.post._id).subscribe((like) => {
+      console.log('Like is ' + like);
+    });
+  }
 }

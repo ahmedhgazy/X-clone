@@ -8,11 +8,7 @@ export const PostsResolve = () => {
   const ps: ProfileService = inject(ProfileService);
   const user: User | null = JSON.parse(localStorage.getItem('user'));
   if (user) {
-    return ps.getUserPosts(user.username).pipe(
-      map((data: UserPost[]) => {
-        return { userPosts: data, username: user.username };
-      })
-    );
+    return ps.getUserPosts(user.username);
   } else {
     return of([]);
   }

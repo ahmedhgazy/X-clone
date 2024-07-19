@@ -14,7 +14,7 @@ export interface UserPost {
 }
 
 export interface Post {
-  _id?: string;
+  _id: string;
   content?: string;
   user?: string;
   repost?: string;

@@ -30,7 +30,7 @@ export class ProfileService {
   authS: AuthService = inject(AuthService);
   constructor() {}
   private API = 'https://twitter-api-ld6h.onrender.com/profile/';
-  private LIKES_API = 'https://twitter-api-ld6h.onrender.com/likes/';
+  private LIKES_API = 'https://twitter-api-ld6h.onrender.com/likes';
   private APIEnv = environment.apiUrl + 'profile';
   http: HttpClient = inject(HttpClient);
   profileDetailsSub = new BehaviorSubject<profileResponse>(null);
@@ -81,5 +81,12 @@ export class ProfileService {
     this.getUserInfo(username);
     this.getUserActions(username);
     this.getUserPosts(username);
+  }
+
+  like(postId: string) {
+    return this.http.patch(
+      'https://twitter-api-ld6h.onrender.com/likes',
+      postId
+    );
   }
 }

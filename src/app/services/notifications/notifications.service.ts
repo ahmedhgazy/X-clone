@@ -9,7 +9,7 @@ export class NotificationService {
   private apiUrl = environment.apiUrl;
 
   getNotifications() {
-    return this.http.get<any>(`${this.apiUrl}notifications`);
+    return this.http.get<any>(`${this.apiUrl}/notifications`);
   }
 
   getNotificationSCount() {

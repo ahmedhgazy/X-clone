@@ -5,7 +5,7 @@
     </section>
   </ng-container>
 
-  <div class="row" *ngIf="userPosts.length == 0">
+  <div class="row" *ngIf="!userPosts$">
     <div class="col-12">
       <div class="actions py-3">
         <h1>Let’s get you set up</h1>

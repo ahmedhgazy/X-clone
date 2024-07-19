@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://twitter-api-ld6h.onrender.com/',
+  apiUrl: 'https://twitter-api-ld6h.onrender.com',
 };
 
 /*
