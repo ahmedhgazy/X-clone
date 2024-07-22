@@ -44,9 +44,7 @@ export class LeftSidebarComponent implements OnInit {
     this.initForm();
   }
 
-  // navToProfile() {
-  //   this.router.navigate(['/profile']);
-  // }
+ 
 
   logOut() {
     this.router.navigate(['/logout']);
@@ -77,30 +75,6 @@ export class LeftSidebarComponent implements OnInit {
     }
   }
 
-  // onSubmit() {
-  //   const formData = new FormData();
-  //   formData.append('content', this.formGroup.get('content')?.value || '');
-
-  //   for (let i = 0; i < this.selectedFiles.length; i++) {
-  //     formData.append(
-  //       'images',
-  //       this.selectedFiles[i],
-  //       this.selectedFiles[i].name
-  //     );
-  //   }
-
-  //   this.postService.createPost(formData).subscribe((UserPost) => {
-  //     this.messageService.add({
-  //       severity: 'success',
-  //       summary: 'Success',
-  //       detail: 'Post created',
-  //     });
-
-  //     this.profileS.getUserPosts(this.userName).subscribe();
-  //   });
-
-  //   this.formGroup.reset();
-  // }
 
   onSubmit() {
     const formData = new FormData();
