@@ -10,17 +10,7 @@ Edit profile | Get Followers - Following |
 Get Posts and posts count |
 Create a post
 
-# Samples
 
-![Alt text](/src/assets/finished/1.PNG)
-![Alt text](/src/assets/finished/2.PNG)
-![Alt text](/src/assets/finished/3.PNG)
-![Alt text](/src/assets/finished/4.PNG)
-![Alt text](/src/assets/finished/5.PNG)
-![Alt text](/src/assets/finished/6.PNG)
-![Alt text](/src/assets/finished/7.PNG)
-![Alt text](/src/assets/finished/post.PNG)
-![Alt text](/src/assets/finished/Post1.PNG)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
